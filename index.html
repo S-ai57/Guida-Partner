@@ -3,321 +3,622 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Guida Qualifica Cliente — AI On-Premise</title>
+<title>L'Ape Gaia – Crêpes a Milano</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg: #ffffff;
-    --bg2: #f5f5f3;
-    --bg3: #ebebea;
-    --text: #1a1a18;
-    --text2: #6b6b67;
-    --text3: #9c9a92;
-    --border: rgba(0,0,0,0.12);
-    --border2: rgba(0,0,0,0.22);
-    --radius: 10px;
-    --radius-lg: 14px;
-    --blue: #185FA5; --blue-bg: #E6F1FB; --blue-border: #B5D4F4;
-    --red: #A32D2D; --red-bg: #FCEBEB; --red-border: #F7C1C1;
-    --green: #3B6D11; --green-bg: #EAF3DE; --green-border: #C0DD97;
-    --amber: #854F0B; --amber-bg: #FAEEDA; --amber-border: #FAC775;
+    --mint: #5ecfcb;
+    --mint-dark: #3db8b4;
+    --yellow: #f5c842;
+    --yellow-dark: #e0b020;
+    --cream: #fdfaf4;
+    --charcoal: #2b2b2b;
+    --warm-gray: #6b6b6b;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #1e1e1c; --bg2: #2a2a28; --bg3: #333331;
-      --text: #e8e6de; --text2: #a8a69e; --text3: #6e6c66;
-      --border: rgba(255,255,255,0.1); --border2: rgba(255,255,255,0.2);
-      --blue: #85B7EB; --blue-bg: #0c2a47; --blue-border: #185FA5;
-      --red: #F09595; --red-bg: #3d1515; --red-border: #791F1F;
-      --green: #97C459; --green-bg: #1a2e08; --green-border: #3B6D11;
-      --amber: #EF9F27; --amber-bg: #2e1e05; --amber-border: #854F0B;
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--charcoal);
+    background: var(--cream);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 5%;
+    background: rgba(253,250,244,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 2px solid var(--yellow);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--charcoal);
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--mint-dark); }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 32px;
+  }
+  nav ul a {
+    text-decoration: none;
+    color: var(--charcoal);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--mint-dark); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 72px;
+  }
+  .hero-left {
+    background: var(--mint);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 8% 80px 10%;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left::before {
+    content: '';
+    position: absolute;
+    bottom: -60px; right: -60px;
+    width: 220px; height: 220px;
+    background: var(--yellow);
+    border-radius: 50%;
+    opacity: 0.35;
+  }
+  .hero-eyebrow {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    opacity: 0.7;
+    margin-bottom: 16px;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    line-height: 1.05;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 8px;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--yellow);
+  }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: white;
+    opacity: 0.85;
+    margin: 20px 0 36px;
+    max-width: 360px;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .hero-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    background: white;
+    color: var(--charcoal);
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.03em;
+  }
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+  }
+  .hero-badge {
+    position: absolute;
+    bottom: 32px; left: -20px;
+    background: var(--yellow);
+    padding: 18px 28px 18px 40px;
+    border-radius: 0 40px 40px 0;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  /* MARQUEE STRIPE */
+  .stripe {
+    background: var(--yellow);
+    padding: 14px 0;
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .stripe-track {
+    display: flex;
+    gap: 40px;
+    animation: marquee 20s linear infinite;
+  }
+  .stripe-text {
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  .stripe-dot {
+    width: 6px; height: 6px;
+    background: var(--charcoal);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ABOUT */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 70vh;
+  }
+  .about-img {
+    overflow: hidden;
+  }
+  .about-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .about-img:hover img { transform: scale(1.04); }
+  .about-text {
+    background: var(--charcoal);
+    color: white;
+    padding: 80px 10% 80px 8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  .about-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    line-height: 1.15;
+    margin-bottom: 24px;
+    font-weight: 700;
+  }
+  .about-text h2 em {
+    font-style: italic;
+    color: var(--yellow);
+  }
+  .about-text p {
+    font-size: 1rem;
+    line-height: 1.75;
+    opacity: 0.85;
+    font-weight: 300;
+    margin-bottom: 16px;
+  }
+
+  /* MENU */
+  .menu-section {
+    padding: 100px 8%;
+    background: var(--cream);
+  }
+  .menu-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+  .menu-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .menu-header h2 em { color: var(--mint-dark); font-style: italic; }
+  .menu-header p {
+    margin-top: 14px;
+    color: var(--warm-gray);
+    font-size: 1rem;
+    font-weight: 300;
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px 64px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .menu-col h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--yellow);
+    display: inline-block;
+  }
+  .menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  .menu-item:last-child { border-bottom: none; }
+  .item-info { flex: 1; }
+  .item-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+  .item-desc {
+    font-size: 0.8rem;
+    color: var(--warm-gray);
+    margin-top: 3px;
+    font-weight: 300;
+  }
+  .item-price {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--mint-dark);
+    white-space: nowrap;
+    margin-left: 16px;
+  }
+
+  /* APE CAR SECTION */
+  .ape-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 60vh;
+  }
+  .ape-text {
+    background: var(--mint);
+    padding: 80px 8% 80px 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .ape-text .section-label { color: var(--charcoal); opacity: 0.65; }
+  .ape-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: white;
+    margin-bottom: 20px;
+  }
+  .ape-text p {
+    font-size: 1rem;
+    color: white;
+    opacity: 0.88;
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 14px;
+  }
+  .pill-btn {
+    display: inline-block;
+    margin-top: 16px;
+    background: var(--yellow);
+    color: var(--charcoal);
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 14px 28px;
+    border-radius: 40px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    letter-spacing: 0.02em;
+    width: fit-content;
+  }
+  .pill-btn:hover {
+    background: var(--yellow-dark);
+    transform: translateY(-2px);
+  }
+  .ape-img { overflow: hidden; }
+  .ape-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* CONTATTI */
+  .contact {
+    background: var(--charcoal);
+    color: white;
+    padding: 100px 8%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .contact h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 32px;
+  }
+  .contact h2 em { color: var(--mint); font-style: italic; }
+  .contact-info { display: flex; flex-direction: column; gap: 24px; }
+  .contact-item { display: flex; flex-direction: column; gap: 4px; }
+  .contact-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    font-weight: 500;
+  }
+  .contact-value {
+    font-size: 1rem;
+    font-weight: 300;
+    opacity: 0.9;
+    line-height: 1.5;
+  }
+  .contact-value a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-value a:hover { color: var(--mint); }
+
+  .map-container {
+    width: 100%;
+    height: 350px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid var(--yellow);
+  }
+  .map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #1a1a1a;
+    color: rgba(255,255,255,0.45);
+    text-align: center;
+    padding: 24px;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+  }
+  footer span { color: var(--mint); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav ul { display: none; }
+    .hero, .about, .ape-section, .contact {
+      grid-template-columns: 1fr;
     }
+    .hero-left { min-height: 70vh; padding: 60px 6%; }
+    .hero-right { min-height: 60vw; }
+    .menu-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-text { padding: 60px 6%; }
+    .ape-text { padding: 60px 6%; }
+    .contact { padding: 60px 6%; gap: 40px; }
   }
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: var(--bg2); color: var(--text); min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; padding: 2rem 1rem; }
-  .wrapper { width: 100%; max-width: 560px; }
-  .header { margin-bottom: 2rem; }
-  .header h1 { font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: .25rem; }
-  .header p { font-size: 13px; color: var(--text2); line-height: 1.5; }
-  .card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; }
-  .phase-label { font-size: 11px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--text3); margin-bottom: .6rem; }
-  .step-title { font-size: 17px; font-weight: 600; color: var(--text); margin-bottom: .35rem; line-height: 1.3; }
-  .step-sub { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 1rem; }
-  .progress { display: flex; gap: 5px; margin-bottom: 1rem; }
-  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border2); transition: background .2s; }
-  .dot.done { background: var(--blue); }
-  .tips { background: var(--bg2); border-radius: var(--radius); padding: .75rem 1rem; margin-bottom: 1rem; }
-  .tips p { font-size: 12px; color: var(--text2); margin-bottom: .3rem; line-height: 1.5; }
-  .tips p:last-child { margin-bottom: 0; }
-  .options { display: flex; flex-direction: column; gap: .5rem; }
-  .opt-btn { width: 100%; text-align: left; padding: .7rem 1rem; font-size: 13px; font-family: inherit; border-radius: var(--radius); border: 0.5px solid var(--border2); background: var(--bg); color: var(--text); cursor: pointer; line-height: 1.4; transition: background .15s, border-color .15s; }
-  .opt-btn:hover { background: var(--bg2); }
-  .opt-btn.yes { border-color: var(--green-border); color: var(--green); }
-  .opt-btn.yes:hover { background: var(--green-bg); }
-  .opt-btn.no { border-color: var(--red-border); color: var(--red); }
-  .opt-btn.no:hover { background: var(--red-bg); }
-  .result-box { border-radius: var(--radius); padding: 1rem; margin-top: 1rem; }
-  .result-box.success { background: var(--green-bg); border: 0.5px solid var(--green-border); }
-  .result-box.danger { background: var(--red-bg); border: 0.5px solid var(--red-border); }
-  .result-box.warning { background: var(--amber-bg); border: 0.5px solid var(--amber-border); }
-  .result-box .rb-title { font-size: 13px; font-weight: 600; margin-bottom: .5rem; }
-  .result-box.success .rb-title { color: var(--green); }
-  .result-box.danger .rb-title { color: var(--red); }
-  .result-box.warning .rb-title { color: var(--amber); }
-  .result-box .action { display: flex; gap: .4rem; margin-bottom: .35rem; font-size: 13px; line-height: 1.5; }
-  .result-box.success .action { color: var(--green); }
-  .result-box.danger .action { color: var(--red); }
-  .result-box.warning .action { color: var(--amber); }
-  .nav { display: flex; gap: .5rem; margin-top: 1rem; flex-wrap: wrap; }
-  .btn-back, .btn-restart { background: none; border: none; font-size: 12px; color: var(--text2); cursor: pointer; font-family: inherit; padding: .3rem .25rem; }
-  .btn-back:hover, .btn-restart:hover { color: var(--text); }
 </style>
 </head>
 <body>
-<div class="wrapper">
-  <div class="header">
-    <h1>Guida qualifica cliente</h1>
-    <p>Segui le domande per capire se il cliente è adatto a una soluzione AI on-premise e cosa fare in ogni scenario.</p>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">L'<span>Ape</span> Gaia</div>
+  <ul>
+    <li><a href="#chi-siamo">Chi siamo</a></li>
+    <li><a href="#menu">Menù</a></li>
+    <li><a href="#ape-car">Ape Car</a></li>
+    <li><a href="#contatti">Contatti</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Food · Drink · Fun</div>
+    <h1 class="hero-title">Crêpes<br><em>fatte con</em><br>amore</h1>
+    <p class="hero-sub">Dolci o salate, preparate al momento con ingredienti freschi e genuini. Ogni crêpe racconta la nostra passione per lo street food di qualità.</p>
+    <div class="hero-tags">
+      <span class="tag">🍓 Dolci</span>
+      <span class="tag">🧀 Salate</span>
+      <span class="tag">📍 Milano</span>
+    </div>
+    <div class="hero-badge">📍 Via Cadore 22, Milano</div>
   </div>
-  <div class="card" id="guide"></div>
+  <div class="hero-right">
+    <img src="https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&w=800&q=80" alt="Crêpes appena fatte">
+  </div>
+</section>
+
+<!-- RUNNING STRIPE (Marquee) -->
+<div class="stripe">
+  <div class="stripe-track">
+    <div class="stripe-text">Street Food di Qualità <span class="stripe-dot"></span> Ingredienti Freschi <span class="stripe-dot"></span> Preparate al Momento <span class="stripe-dot"></span> Crêpes con Amore <span class="stripe-dot"></span></div>
+    <div class="stripe-text">Street Food di Qualità <span class="stripe-dot"></span> Ingredienti Freschi <span class="stripe-dot"></span> Preparate al Momento <span class="stripe-dot"></span> Crêpes con Amore <span class="stripe-dot"></span></div>
+  </div>
 </div>
 
-<script>
-const steps = {
-  start: {
-    phase: 'Fase 1 — Esplorazione',
-    title: 'Come è arrivato questo cliente?',
-    sub: 'Capire il punto di partenza aiuta a scegliere il giusto approccio.',
-    progress: 1,
-    options: [
-      { label: '🏢 Vuole una soluzione on-premise', next: 'onprem' },
-      { label: '💸 Si lamenta del costo dei token cloud', next: 'token_cost' },
-      { label: '☁️ Sta già comprando una licenza enterprise cloud (Gemini, ecc.)', next: 'enterprise_cloud' },
-      { label: '🔍 Nessuna delle precedenti — non sa ancora cosa vuole', next: 'explore_need' }
-    ]
-  },
-  onprem: {
-    phase: 'Fase 2 — Qualifica AI',
-    title: 'Perché vuole una soluzione on-premise?',
-    sub: 'Capire la motivazione è fondamentale per valutare se il cliente è in target.',
-    progress: 2,
-    tips: ['💬 "Quali dati userebbe con l\'AI? Ci sono vincoli di privacy o compliance?"', '💬 "Ha già un ambiente IT strutturato on-site?"'],
-    options: [
-      { label: '🔒 Privacy / GDPR — dati sensibili che non possono uscire', next: 'has_usecase', type: 'yes' },
-      { label: '📊 Costo certo — vuole predictable cost vs token', next: 'has_usecase', type: 'yes' },
-      { label: '⚠️ Vuole "ChatGPT ma gratis" — uso generico senza vincoli reali', next: 'redflag', type: 'no' }
-    ]
-  },
-  token_cost: {
-    phase: 'Fase 2 — Qualifica AI',
-    title: 'Per quale caso d\'uso usa la licenza enterprise?',
-    sub: 'Chi si lamenta dei token ha già un utilizzo. Capire quale.',
-    progress: 2,
-    tips: ['💬 "Quanto spende al mese in token? Con che volumi lavora?"', '💬 "Questi dati passano su cloud oggi? C\'è un problema di compliance?"'],
-    options: [
-      { label: '✅ Uso interno intensivo con dati sensibili', next: 'has_usecase', type: 'yes' },
-      { label: '⚠️ Uso leggero / esplorativo — nessun caso d\'uso chiaro', next: 'redflag', type: 'no' }
-    ]
-  },
-  enterprise_cloud: {
-    phase: 'Fase 2 — Qualifica AI',
-    title: 'A cosa serve la licenza enterprise che sta comprando?',
-    sub: 'Capire perché sta valutando cloud enterprise aiuta a posizionare l\'alternativa on-premise.',
-    progress: 2,
-    tips: ['💬 "Perché sta valutando una soluzione cloud enterprise e non on-premise?"', '💬 "Ha requisiti di data residency o audit trail?"'],
-    options: [
-      { label: '✅ Ha dati sensibili / compliance — il cloud è un compromesso', next: 'has_usecase', type: 'yes' },
-      { label: '⚠️ Vuole solo un tool collaborativo generico per i dipendenti', next: 'redflag', type: 'no' }
-    ]
-  },
-  explore_need: {
-    phase: 'Fase 2 — Qualifica AI',
-    title: 'Il cliente non ha ancora chiaro cosa vuole fare con l\'AI?',
-    sub: 'In questo caso il tuo obiettivo è fare discovery, non vendere.',
-    progress: 2,
-    tips: ['💬 "Quali processi interni sono più ripetitivi o lenti oggi?"', '💬 "Ha già sperimentato con ChatGPT? Con quali risultati?"'],
-    options: [
-      { label: '✅ Emerge un bisogno concreto durante la conversazione', next: 'has_usecase', type: 'yes' },
-      { label: '⚠️ Nessun caso d\'uso concreto — solo curiosità generica', next: 'redflag', type: 'no' }
-    ]
-  },
-  redflag: {
-    phase: '🚩 Red flag — Cliente fuori target',
-    title: 'Questo cliente non è in target',
-    sub: 'Vuole solo un ChatGPT più economico o non ha un caso d\'uso reale. Una soluzione on-premise non risolve il suo problema.',
-    progress: 2,
-    result: { type: 'danger', actions: [
-      'Non procedere con il processo di vendita on-premise',
-      'Spiega che la soluzione richiede un caso d\'uso specifico e infrastruttura dedicata',
-      'Suggerisci di tornare quando ha identificato un progetto concreto',
-      'Tieni il contatto: potrebbe maturare in futuro'
-    ]}
-  },
-  has_usecase: {
-    phase: 'Fase 3 — Scenari possibili',
-    title: 'Il cliente vuole ChatGPT in locale o ha casi d\'uso specifici?',
-    sub: 'La risposta determina il percorso commerciale.',
-    progress: 3,
-    options: [
-      { label: '💬 ChatGPT in locale — tool generale per i dipendenti', next: 'chatgpt_local' },
-      { label: '⚙️ Casi d\'uso specifici — automazione, RAG, agenti, ecc.', next: 'specific_usecase' }
-    ]
-  },
-  chatgpt_local: {
-    phase: 'Fase 3 — Budget',
-    title: 'Ha budget adeguato per una soluzione on-premise generale?',
-    sub: 'Una soluzione tipo "ChatGPT privato" richiede infrastruttura significativa. Il budget minimo indicativo è di 2 milioni di euro.',
-    progress: 3,
-    tips: ['💬 "Qual è il budget approssimativo per questo progetto?"', '💬 "Quanti utenti devono accedere alla piattaforma?"'],
-    options: [
-      { label: '✅ Sì — ha budget superiore a 2 milioni di euro', next: 'proceed_general', type: 'yes' },
-      { label: '⚠️ No — budget inferiore a 2 milioni, vuole stare in locale a tutti i costi', next: 'find_usecase', type: 'no' }
-    ]
-  },
-  proceed_general: {
-    phase: '✅ Cliente qualificato',
-    title: 'Vai alla Fase 4: fattibilità',
-    sub: 'Il cliente vuole ChatGPT in locale e ha budget. È in target.',
-    progress: 4,
-    result: { type: 'success', actions: [
-      'Crea un POC sulla tua macchina NFR da mostrare al cliente',
-      'Offerta: includi giornate uomo per formazione e setup se necessario',
-      'Se sei System Integrator: proponi un piano di sviluppo da allegare all\'offerta',
-      'Se sei Reseller: chiedi a Galene di mappare un partner SI e proponi solo hardware + software'
-    ]}
-  },
-  find_usecase: {
-    phase: 'Fase 3 — Reindirizzo',
-    title: 'Budget limitato: trova casi d\'uso specifici',
-    sub: 'Se vuole restare on-premise ma il budget non supporta una soluzione generale, orienta verso un progetto più circoscritto.',
-    progress: 3,
-    tips: ['💬 "C\'è un reparto o processo specifico dove l\'AI darebbe più valore?"', '💬 "Avete problemi con gestione documentale, assistenza clienti o reportistica?"'],
-    options: [
-      { label: '✅ Emerge un caso d\'uso specifico', next: 'specific_usecase', type: 'yes' },
-      { label: '⚠️ Nessun caso d\'uso — insiste su soluzione generale senza budget', next: 'redflag_budget', type: 'no' }
-    ]
-  },
-  redflag_budget: {
-    phase: '🚩 Red flag — Budget insufficiente',
-    title: 'Cliente non qualificato per ora',
-    sub: 'Vuole una soluzione on-premise generale ma non ha budget sufficiente e non riesce a identificare un caso d\'uso specifico.',
-    progress: 3,
-    result: { type: 'danger', actions: [
-      'Non procedere con l\'offerta',
-      'Spiega chiaramente il costo minimo di una soluzione on-premise',
-      'Proponi di tornare quando ha identificato un budget o un progetto specifico',
-      'Tieni il contatto'
-    ]}
-  },
-  specific_usecase: {
-    phase: 'Fase 4 — Fattibilità',
-    title: 'Il caso d\'uso è semplice o complesso?',
-    sub: 'Valuta la complessità tecnica del caso d\'uso identificato.',
-    progress: 4,
-    tips: ['Semplice: ricerca documentale, Q&A su knowledge base, assistente virtuale standard', 'Complesso: integrazione con sistemi legacy, agenti autonomi, fine-tuning, pipeline dati'],
-    options: [
-      { label: '✅ Caso d\'uso semplice', next: 'poc_simple', type: 'yes' },
-      { label: '⚙️ Caso d\'uso complesso', next: 'complex_partner' }
-    ]
-  },
-  poc_simple: {
-    phase: '✅ Procedi con POC',
-    title: 'Crea un POC e prepara l\'offerta',
-    sub: 'Caso d\'uso semplice e cliente qualificato.',
-    progress: 4,
-    result: { type: 'success', actions: [
-      'Crea il POC sulla tua macchina NFR da mostrare al cliente',
-      'Offerta: includi licenze software, hardware, e giornate uomo per setup e formazione',
-      'Definisci chiaramente scope e deliverable del progetto'
-    ]}
-  },
-  complex_partner: {
-    phase: 'Fase 4 — Caso complesso',
-    title: 'Chi sei tu in questo deal?',
-    sub: 'La strategia cambia in base al tuo ruolo nel canale.',
-    progress: 4,
-    options: [
-      { label: '🔧 Sono System Integrator', next: 'si_offer' },
-      { label: '🤝 Sono Reseller', next: 'reseller_offer' }
-    ]
-  },
-  si_offer: {
-    phase: '✅ System Integrator — Offerta',
-    title: 'Proponi un piano di sviluppo',
-    sub: 'Il caso è complesso ma sei attrezzato per svilupparlo.',
-    progress: 4,
-    result: { type: 'success', actions: [
-      'Prepara un piano di sviluppo dettagliato da allegare all\'offerta',
-      'Includi: analisi, architettura, sviluppo, testing, formazione',
-      'Offerta: hardware + software + giornate uomo di sviluppo'
-    ]}
-  },
-  reseller_offer: {
-    phase: '✅ Reseller — Offerta',
-    title: 'Coinvolgi Galene per il supporto tecnico',
-    sub: 'Il caso è complesso: non svilupparlo da solo.',
-    progress: 4,
-    result: { type: 'success', actions: [
-      'Chiedi a Galene di mappare un partner System Integrator adatto',
-      'La tua offerta copre: hardware + software',
-      'Il SI gestisce la parte di sviluppo e integrazione',
-      'Coordina con il SI per presentare un\'offerta unitaria al cliente'
-    ]}
-  }
-};
+<!-- ABOUT -->
+<section id="chi-siamo" class="about">
+  <div class="about-img">
+    <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=800&q=80" alt="Ingredienti dolci e salati">
+  </div>
+  <div class="about-text">
+    <div class="section-label">La nostra storia</div>
+    <h2>Il gusto che ti <em>fa volare</em></h2>
+    <p>L'Ape Gaia nasce a Milano dall'idea di portare lo street food tradizionale a un livello superiore. Selezioniamo solo farine di prima scelta e farciture fresche, locali e stagionali.</p>
+    <p>Dalla colazione golosa fino allo spuntino di mezzanotte, ci trovate nel nostro locale fisso in via Cadore o in giro per la città con la nostra inconfondibile Ape Car.</p>
+  </div>
+</section>
 
-const totalSteps = 5;
-let history = [];
+<!-- MENU -->
+<section id="menu" class="menu-section">
+  <div class="menu-header">
+    <h2>Il nostro <em>Menù</em></h2>
+    <p>Scegli tra le nostre specialità dolci o lasciati sorprendere dalle combinazioni salate.</p>
+  </div>
 
-function render(key) {
-  const s = steps[key];
-  const g = document.getElementById('guide');
-  let h = '';
+  <div class="menu-grid">
+    <!-- COLONNA SALATE -->
+    <div class="menu-col">
+      <h3>Le Salate</h3>
+      
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">La Milanese</div>
+          <div class="item-desc">Prosciutto crudo di Parma, mozzarella fior di latte, rucola fresca</div>
+        </div>
+        <div class="item-price">€ 7,50</div>
+      </div>
 
-  // Progress
-  h += '<div class="progress">';
-  for (let i = 1; i <= totalSteps; i++) h += `<div class="dot${i <= s.progress ? ' done' : ''}"></div>`;
-  h += '</div>';
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">L'Ape Contadina</div>
+          <div class="item-desc">Zucchine grigliate, pomodorini confit, formaggio caprino, pesto leggero</div>
+        </div>
+        <div class="item-price">€ 7,00</div>
+      </div>
 
-  h += `<div class="phase-label">${s.phase}</div>`;
-  h += `<div class="step-title">${s.title}</div>`;
-  h += `<div class="step-sub">${s.sub}</div>`;
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">La Saporita</div>
+          <div class="item-desc">Salame piccante, scamorza affumicata, funghetti trifolati</div>
+        </div>
+        <div class="item-price">€ 8,00</div>
+      </div>
+      
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Nordica</div>
+          <div class="item-desc">Salmone affumicato, formaggio spalmabile, un tocco di erba cipollina</div>
+        </div>
+        <div class="item-price">€ 9,00</div>
+      </div>
+    </div>
 
-  if (s.tips) {
-    h += '<div class="tips">';
-    s.tips.forEach(t => h += `<p>${t}</p>`);
-    h += '</div>';
-  }
+    <!-- COLONNA DOLCI -->
+    <div class="menu-col">
+      <h3>Le Dolci</h3>
+      
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Classica e Intramontabile</div>
+          <div class="item-desc">Nutella o crema di pistacchio artigianale con granella</div>
+        </div>
+        <div class="item-price">€ 5,00</div>
+      </div>
 
-  if (s.options) {
-    h += '<div class="options">';
-    s.options.forEach(opt => {
-      const cls = opt.type === 'yes' ? ' yes' : opt.type === 'no' ? ' no' : '';
-      h += `<button class="opt-btn${cls}" onclick="go('${opt.next}','${key}')">${opt.label}</button>`;
-    });
-    h += '</div>';
-  }
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Bosco Incantato</div>
+          <div class="item-desc">Cioccolato bianco, frutti di bosco freschi e foglioline di menta</div>
+        </div>
+        <div class="item-price">€ 6,00</div>
+      </div>
 
-  if (s.result) {
-    const r = s.result;
-    h += `<div class="result-box ${r.type}"><div class="rb-title">Cosa fare</div>`;
-    r.actions.forEach(a => h += `<div class="action"><span>→</span><span>${a}</span></div>`);
-    h += '</div>';
-  }
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Nonna Gaia</div>
+          <div class="item-desc">Confettura di albicocche biologica, biscotto amaretto sbriciolato</div>
+        </div>
+        <div class="item-price">€ 5,50</div>
+      </div>
 
-  h += '<div class="nav">';
-  if (history.length > 0) h += `<button class="btn-back" onclick="goBack()">← Torna indietro</button>`;
-  if (s.result) h += `<button class="btn-restart" onclick="restart()">↩ Ricomincia da capo</button>`;
-  h += '</div>';
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Esotica</div>
+          <div class="item-desc">Miele millefiori, banane a rondelle e cannella</div>
+        </div>
+        <div class="item-price">€ 5,50</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  g.innerHTML = h;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+<!-- APE CAR SECTION -->
+<section id="ape-car" class="ape-section">
+  <div class="ape-text">
+    <div class="section-label">Street Food On The Road</div>
+    <h2>L'Ape Gaia al tuo <em>evento</em></h2>
+    <p>Vuoi rendere unico il tuo compleanno, matrimonio o evento aziendale? La nostra iconica Ape Car porta il profumo e la fragranza delle crêpes direttamente da te.</p>
+    <p>Un servizio catering alternativo, pop e delizioso che lascerà a bocca aperta tutti i tuoi ospiti.</p>
+    <a href="#contatti" class="pill-btn">Richiedi un preventivo</a>
+  </div>
+  <div class="ape-img">
+    <img src="https://images.unsplash.com/photo-1567121938596-8d9d015d9f71?auto=format&fit=crop&w=800&q=80" alt="Ape Car Street Food">
+  </div>
+</section>
 
-function go(next, from) { history.push(from); render(next); }
-function goBack() { render(history.pop()); }
-function restart() { history = []; render('start'); }
+<!-- CONTATTI -->
+<section id="contatti" class="contact">
+  <div>
+    <h2>Vieni a <em>trovarci</em> o scrivici</h2>
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-label">Dove siamo</div>
+        <div class="contact-value">Via Cadore 22, 20135 Milano (MI)</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Orari di apertura</div>
+        <div class="contact-value">Mar - Dom: 12:00 - 23:00<br>Lunedì: Chiuso</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Contatti rapido</div>
+        <div class="contact-value">
+          Telefono: <a href="tel:+39021234567">+39 02 1234567</a><br>
+          Email: <a href="mailto:info@lapegaia-crepes.it">info@lapegaia-crepes.it</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="map-container">
+    <!-- Google Maps incorporata centrata su Via Cadore, Milano -->
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2798.544719047394!2d9.2128795!3d45.458872!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c6ca5cb8798b%3A0xc6cb1c7df489f649!2sVia%20Cadore%2C%2022%2C%2020135%20Milano%20MI!5e0!3m2!1sit!2sit!4v1710000000000!5m2!1sit!2sit" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</section>
 
-render('start');
-</script>
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 L'Ape Gaia – Crêperie Milano. Tutti i diritti riservati. Realizzato con <span>&hearts;</span> per il buon cibo.</p>
+</footer>
+
 </body>
 </html>
